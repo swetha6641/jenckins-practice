@@ -15,7 +15,7 @@ pipeline {
                 script{
                     bat """
                         echo "Hello Build"
-                        env
+                        set
                     """
                 }
             }

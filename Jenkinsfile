@@ -23,7 +23,7 @@ pipeline {
                 script{
                     bat """
                         echo "Hello Build"
-                        sleep 10
+                        timeout /t 10
                         set
                         echo "Hello ${params.PERSON}"
                     """

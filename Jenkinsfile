@@ -6,9 +6,10 @@ pipeline {
         COURSE = 'jenkins'
     }
     options {
-        timeout(time: 10, unit: 'MINUTES') 
+        timeout(time: 30, unit: 'MINUTES') 
+        disableConcurrentBuilds()
     }
-     parameters {
+    parameters {
         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
         text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
         booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
@@ -20,9 +21,10 @@ pipeline {
         stage('Build') {
             steps {
                 script{
-                    bat """
+                    sh """
                         echo "Hello Build"
-                        set
+                        sleep 10
+                        env
                         echo "Hello ${params.PERSON}"
                     """
                 }
@@ -35,7 +37,7 @@ pipeline {
                 }
             }
         }
-          stage('DEPLOY') {
+        stage('Deploy') {
             input {
                 message "Should we continue?"
                 ok "Yes, we should."
@@ -47,11 +49,11 @@ pipeline {
             steps {
                 script{
                     echo "Hello, ${PERSON}, nice to meet you."
-                    echo 'DEPKLOYING..'
+                    
+                    echo 'Deploying..'
                 }
             }
         }
-        
         
     }
 

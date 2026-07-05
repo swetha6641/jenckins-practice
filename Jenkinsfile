@@ -21,10 +21,10 @@ pipeline {
         stage('Build') {
             steps {
                 script{
-                    sh """
+                    bat """
                         echo "Hello Build"
                         sleep 10
-                        env
+                        set
                         echo "Hello ${params.PERSON}"
                     """
                 }
